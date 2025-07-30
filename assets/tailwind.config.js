@@ -9,22 +9,45 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/prism_web.ex",
-    "../lib/prism_web/**/*.*ex"
+    "../lib/prism_web/**/*.*ex",
+    "../storybook/**/*.*ex"
   ],
   theme: {
     extend: {
       colors: {
         brand: "#FD4F00",
+        'glow-cyan': '#00ffff',
+        'glow-pink': '#ff00ff',
+        'glow-orange': '#ff6600',
+        'dark-bg': '#0a0a0a',
+        'neon-green': '#00ff00',
+        'electric-blue': '#0099ff',
+      },
+      fontFamily: {
+        'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      animation: {
+        'pulse-glow': 'pulse-glow 2s ease-in-out infinite alternate',
+        'neon-flicker': 'neon-flicker 0.15s ease-in-out infinite alternate',
+      },
+      keyframes: {
+        'pulse-glow': {
+          'from': { textShadow: '0 0 4px #0ff, 0 0 8px #0ff, 0 0 12px #0ff' },
+          'to': { textShadow: '0 0 6px #0ff, 0 0 12px #0ff, 0 0 18px #0ff, 0 0 24px #0ff' }
+        },
+        'neon-flicker': {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.8' }
+        }
       }
     },
   },
   plugins: [
     require("@tailwindcss/forms"),
-    // Allows prefixing tailwind classes with LiveView classes to add rules
-    // only when LiveView classes are applied, for example:
-    //
-    //     <div class="phx-click-loading:animate-ping">
-    //
+    require("@tailwindcss/typography"),
+    require("daisyui"),
+    
+    // LiveView loading states
     plugin(({addVariant}) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
     plugin(({addVariant}) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
     plugin(({addVariant}) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"])),
@@ -70,5 +93,30 @@ module.exports = {
         }
       }, {values})
     })
-  ]
+  ],
+  
+  // DaisyUI Configuration
+  daisyui: {
+    themes: [
+      {
+        thunderprism: {
+          "primary": "#00ffff",        // glow-cyan
+          "secondary": "#ff00ff",      // glow-pink  
+          "accent": "#ff6600",         // glow-orange
+          "neutral": "#1a1a1a",        // dark neutral
+          "base-100": "#0a0a0a",       // dark-bg
+          "base-200": "#111111",       // slightly lighter
+          "base-300": "#1a1a1a",       // neutral dark
+          "info": "#0099ff",           // electric-blue
+          "success": "#00ff00",        // neon-green
+          "warning": "#ffff00",        // neon yellow
+          "error": "#ff0066",          // neon red
+        }
+      },
+      "dark", // fallback theme
+    ],
+    base: true,
+    styled: true,
+    utils: true,
+  }
 }

@@ -16,6 +16,7 @@ defmodule PrismWeb.CoreComponents do
   """
   use Phoenix.Component
   use Gettext, backend: PrismWeb.Gettext
+  use Doggo.Components
 
   alias Phoenix.LiveView.JS
 

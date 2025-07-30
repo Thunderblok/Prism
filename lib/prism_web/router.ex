@@ -17,8 +17,10 @@ defmodule PrismWeb.Router do
   scope "/", PrismWeb do
     pipe_through :browser
 
-    # Tactical interface as home
-    live "/", TacticalLive
+    # Enhanced Thunderprism interface
+    live "/", ThunderprismLive
+    # Legacy tactical interface
+    live "/tactical", TacticalLive
   end  # Other scopes may use custom stacks.
   # scope "/api", PrismWeb do
   #   pipe_through :api
