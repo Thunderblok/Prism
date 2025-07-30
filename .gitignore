@@ -1,0 +1,107 @@
+# The directory Mix will write compiled artifacts to.
+/_build/
+
+# If you run "mix test --cover", coverage assets end up here.
+/cover/
+
+# The directory Mix downloads your dependencies sources to.
+/deps/
+
+# Where 3rd-party dependencies like ExDoc output generated docs.
+/doc/
+
+# Ignore .fetch files in case you like to edit your project deps locally.
+/.fetch
+
+# If the VM crashes, it generates a dump, let's ignore it too.
+erl_crash.dump
+
+# Also ignore archive artifacts (built via "mix archive.build").
+*.ez
+
+# Temporary files, for example, from tests.
+/tmp/
+
+# Ignore package tarball (built via "mix hex.build").
+prism-*.tar
+
+# Ignore assets that are produced by build tools.
+/priv/static/assets/
+
+# Ignore digested assets cache.
+/priv/static/cache_manifest.json
+
+# In case you use Node.js/npm, you want to ignore these.
+npm-debug.log
+/assets/node_modules/
+
+# Additional Tactical Interface & Federation Ignores
+
+# Development environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor and OS files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.tmp
+
+# Federation-specific files
+/priv/federation_keys/
+/priv/federation_cache/
+config/dev.secret.exs
+config/prod.secret.exs
+
+# Tactical interface assets
+/priv/tactical_cache/
+tactical_screenshots/
+
+# AI and PAC agent files
+/priv/ai_cache/
+/priv/mcp_cache/
+/priv/pac_state/
+
+# LiveView uploads
+/priv/uploads/
+
+# Performance monitoring
+/priv/monitoring/
+
+# Coverage and analysis
+coverage/
+lcov.info
+/*.plt
+/*.plt.hash
+
+# Documentation
+docs/
+priv/gettext/*/LC_MESSAGES/*.mo
+
+# Test fixtures
+test/support/fixtures/federation/
+
+# Benchmark results
+benchmarks/results/
+

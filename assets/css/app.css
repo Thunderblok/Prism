@@ -1,0 +1,288 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Tactical Interface Styles */
+
+/* Custom animations */
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tactical elements */
+.tactical-border {
+  position: relative;
+}
+
+.tactical-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00ff00, transparent, #00ff00);
+  border-radius: inherit;
+  z-index: -1;
+  animation: pulse-green 2s infinite;
+}
+
+/* Terminal glow effect */
+.terminal-glow {
+  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+}
+
+/* Scan line effect */
+.scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  animation: scan-line 3s infinite;
+}
+
+/* Grid enhancement */
+.tactical-grid {
+  background-image: 
+    linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Button styling */
+.tactical-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tactical-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.tactical-button:hover::before {
+  left: 100%;
+}
+
+/* Status indicators */
+.status-online {
+  box-shadow: 0 0 10px #00ff00;
+}
+
+.status-warning {
+  box-shadow: 0 0 10px #ffaa00;
+}
+
+.status-critical {
+  box-shadow: 0 0 10px #ff0000;
+}
+
+.status-offline {
+  box-shadow: 0 0 10px #666666;
+}
+
+/* Responsive tactical interface */
+@media (max-width: 1024px) {
+  .tactical-interface {
+    flex-direction: column;
+  }
+  
+  .side-panel {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+}
+
+/* Mobile-first responsive grid */
+.tactical-grid-responsive {
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (min-width: 640px) {
+  .tactical-grid-responsive {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tactical-grid-responsive {
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+/* Touch-friendly interface optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:bg-green-400:hover {
+    background-color: transparent;
+  }
+  
+  /* Larger touch targets */
+  button {
+    min-height: 44px;
+  }
+  
+  .node-grid-item {
+    min-height: 60px;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .tactical-button:hover::before {
+    left: -100%;
+  }
+}
+
+/* Responsive text sizing */
+.text-responsive-xs { font-size: clamp(0.6rem, 2vw, 0.75rem); }
+.text-responsive-sm { font-size: clamp(0.75rem, 2.5vw, 0.875rem); }
+.text-responsive-base { font-size: clamp(0.875rem, 3vw, 1rem); }
+.text-responsive-lg { font-size: clamp(1rem, 3.5vw, 1.125rem); }
+.text-responsive-xl { font-size: clamp(1.125rem, 4vw, 1.25rem); }
+
+/* Mobile tab navigation */
+.mobile-tab {
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-tab.active {
+  background: rgba(0, 255, 0, 0.2);
+  border-bottom-color: #00ff00;
+}
+
+/* Enhanced node grid items */
+.node-grid-item {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.node-grid-item:active {
+  transform: scale(0.95);
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.node-grid-item.selected {
+  border-color: #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+/* Optimize for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .radar-sweep,
+  .scan-line::after,
+  .tactical-border::before,
+  .typewriter {
+    animation: none;
+  }
+  
+  .tactical-button,
+  .node-grid-item,
+  .mobile-tab {
+    transition: none;
+  }
+}
+
+/* Improved scrolling on mobile */
+.tactical-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #00ff00 transparent;
+}
+
+/* Custom scrollbar */
+.tactical-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tactical-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tactical-scroll::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+}
+
+.tactical-scroll::-webkit-scrollbar-thumb:hover {
+  background: #00aa00;
+}
+
+/* Typewriter effect */
+.typewriter {
+  overflow: hidden;
+  border-right: 2px solid #00ff00;
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #00ff00 }
+}
+
+/* Matrix-style background */
+.matrix-bg {
+  background: radial-gradient(ellipse at center, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+}
+
+/* Command line cursor */
+.cmd-cursor::after {
+  content: '█';
+  color: #00ff00;
+  animation: pulse-green 1s infinite;
+}
